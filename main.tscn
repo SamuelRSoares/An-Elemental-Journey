@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://wuov3qqkqij8"]
+
+[ext_resource type="PackedScene" uid="uid://de83ki2i2xhoy" path="res://character/main_character.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://mcw45p2qpgx" path="res://enemies/enemy_goblin_sword.tscn" id="2_0xm2m"]
+
+[node name="main" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_ig7tw")]
+
+[node name="EnemyGoblinSword" parent="." instance=ExtResource("2_0xm2m")]
