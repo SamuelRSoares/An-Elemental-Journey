@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvwi44xsm1hdf"]
+
+[ext_resource type="PackedScene" uid="uid://ispfrgluegis" path="res://healthbar/health_bar.tscn" id="1_fyqef"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="HealthBar" parent="." instance=ExtResource("1_fyqef")]
+offset_left = 1039.9999
+offset_top = -12.999999
+offset_right = -112.00012
+offset_bottom = -661.0
+scale = Vector2(0.2, 0.2)

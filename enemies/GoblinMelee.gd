@@ -2,6 +2,7 @@ extends EnemyBase
 
 @onready var detection_area: Area2D = $DetectionArea
 @onready var attack_area: Area2D = $AttackArea
+var grupoPlayer = "Player"
 
 func _ready():
 	detection_area.body_entered.connect(_on_detection_area_body_entered)
@@ -64,10 +65,11 @@ func _on_animation_finished():
 func _on_detection_area_body_entered(body):
 	# Verifica se o corpo que entrou tem um script de jogador (ou está no grupo "player").
 	# Para isso, seu jogador precisa estar no grupo "player".
-	if body.is_in_group("player"):
+	if body.is_in_group(grupoPlayer):
+		print("Jogador detectado pelo goblin")
 		player = body
 
 func _on_detection_area_body_exited(body):
-	if body.is_in_group("player"):
+	if body.is_in_group(grupoPlayer):
 		player = null
 		change_state(State.IDLE)

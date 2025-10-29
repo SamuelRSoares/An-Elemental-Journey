@@ -64,14 +64,13 @@ animations = [{
 radius = 90.0
 height = 456.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
+scale = Vector2(0.15, 0.15)
 script = ExtResource("1_qt5ce")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Player"]]
-position = Vector2(624, 392)
 sprite_frames = SubResource("SpriteFrames_4ptrd")
 animation = &"idle_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
-position = Vector2(603, 397)
 shape = SubResource("CapsuleShape2D_2q82o")

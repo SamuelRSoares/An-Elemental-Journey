@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ispfrgluegis"]
+
+[ext_resource type="Script" uid="uid://dojpssxv868gk" path="res://healthbar/HealthBar.gd" id="1_6qybf"]
+[ext_resource type="Texture2D" uid="uid://x62r35q2cjxd" path="res://sprites/health_bar_under.png" id="2_03n5e"]
+[ext_resource type="Texture2D" uid="uid://c41iutbv0s10j" path="res://sprites/hp_bar-removebg-preview.png" id="2_i2eju"]
+
+[node name="HealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6qybf")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 612.0
+offset_bottom = 408.0
+texture_under = ExtResource("2_03n5e")
+texture_progress = ExtResource("2_i2eju")
