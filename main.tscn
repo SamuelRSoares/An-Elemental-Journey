@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://wuov3qqkqij8"]
+[gd_scene load_steps=5 format=3 uid="uid://wuov3qqkqij8"]
 
+[ext_resource type="Script" uid="uid://dunkbed0l6pko" path="res://main.gd" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://de83ki2i2xhoy" path="res://character/main_character.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://mcw45p2qpgx" path="res://enemies/enemy_goblin_sword.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bvwi44xsm1hdf" path="res://ui.tscn" id="3_h2yge"]
 
 [node name="main" type="Node2D"]
+script = ExtResource("1_1bvp3")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_ig7tw")]
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 
 [node name="EnemyGoblinSword" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(536, 192)
