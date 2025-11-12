@@ -1,69 +1,95 @@
-#GoblinMelee.gd
+# GoblinMelee.gd
 extends EnemyBase
 
 @onready var detection_area: Area2D = $DetectionArea
 @onready var attack_area: Area2D = $AttackArea
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 
-var grupoPlayer = "Player" # Nome do grupo do jogador
+var grupoPlayer = "Player"
 var damage_dealt_this_attack = false
-var player_in_attack_range = false # NOVA VARIÁVEL
+var player_in_attack_range = false
+
+# Controle de tempo de ataque
+var attack_timer: float = 0.0
+@export var attack_duration: float = 2.1          # duração total da animação
+@export var attack_impact_time: float = 0.98       # momento em que o golpe acerta
+@export var attack_hitbox_duration: float = 0.1   # tempo em que a hitbox fica ativa
+
+# Controle interno
+var attack_started := false
+var attack_phase_done := false
 
 func _ready():
-	# Conexões de sinais (assumindo que foram feitas pelo editor)
-	animated_sprite.animation_finished.connect(_on_animation_finished)
+	pass
+
+# -------------------------------
+# ESTADOS
+# -------------------------------
 
 func _idle_state(_delta: float):
 	super._idle_state(_delta)
 	velocity = Vector2.ZERO
-	if player != null:
+	if player:
 		change_state(State.CHASING)
 
 func _chasing_state(_delta: float):
-	if player == null:
+	if not player:
 		change_state(State.IDLE)
 		return
 
-	# Se o jogador estiver no alcance de ataque, mude para o estado de ataque.
-	# Esta verificação agora é muito mais simples e robusta!
 	if player_in_attack_range:
 		change_state(State.ATTACKING)
-		return # Para de executar o resto do código de perseguição
+		return
 
 	var direction = (player.global_position - global_position).normalized()
 	velocity = direction * speed
 	play_animation("walk_side")
 	animated_sprite.flip_h = velocity.x < 0
-	
-func _attacking_state(_delta: float):
+
+func _attacking_state(delta: float):
 	velocity = Vector2.ZERO
-	if animated_sprite.animation != "attack_slash_1":
+
+	# 🔹 Se o ataque acabou de começar, reinicializa tudo
+	if not attack_started:
 		play_animation("attack_slash_1")
 		damage_dealt_this_attack = false
+		hitbox_collision_shape.disabled = true
+		attack_phase_done = false
+		attack_timer = 0.0
+		attack_started = true
+		print("[Goblin LOG] Iniciando ataque...")
+
+	# 🔹 Avança o tempo do ataque
+	attack_timer += delta
+
+	# 🔹 Ativa a hitbox no momento certo
+	if not attack_phase_done and attack_timer >= attack_impact_time:
 		hitbox_collision_shape.set_deferred("disabled", false)
-		print("[Goblin LOG] Ataque iniciado, hitbox ATIVADA.")
-		
+		print("[Goblin LOG] Hitbox ativada!")
+		attack_phase_done = true
+
+	# 🔹 Desativa a hitbox logo depois
+	if attack_phase_done and attack_timer >= attack_impact_time + attack_hitbox_duration:
+		hitbox_collision_shape.set_deferred("disabled", true)
+
+	# 🔹 Final do ataque
+	if attack_timer >= attack_duration:
+		hitbox_collision_shape.set_deferred("disabled", true)
+		attack_started = false  # permite o próximo ataque
+		attack_timer = 0.0
+
+		if player_in_attack_range:
+			change_state(State.ATTACKING)
+		else:
+			change_state(State.CHASING)
+
 func _hurt_state(_delta: float):
 	velocity = Vector2.ZERO
 	play_animation("hurt")
 
-func _on_animation_finished():
-	match current_state:
-		State.ATTACKING:
-			hitbox_collision_shape.set_deferred("disabled", true)
-			print("[Goblin LOG] Ataque finalizado, hitbox DESATIVADA.")
-			
-			# Se o jogador ainda estiver perto, ataca de novo. Se não, persegue.
-			if player_in_attack_range:
-				change_state(State.ATTACKING)
-			else:
-				change_state(State.CHASING)
-		State.HURT:
-			change_state(State.CHASING)
-		State.DEAD:
-			queue_free()
-
-# --- Funções de Sinais das Áreas ---
+# -------------------------------
+# ÁREAS
+# -------------------------------
 
 func _on_detection_area_body_entered(body):
 	if body.is_in_group(grupoPlayer):
@@ -73,10 +99,9 @@ func _on_detection_area_body_entered(body):
 func _on_detection_area_body_exited(body):
 	if body.is_in_group(grupoPlayer):
 		player = null
-		player_in_attack_range = false # Garante que isso resete se o jogador sair correndo
+		player_in_attack_range = false
 		change_state(State.IDLE)
 
-# NOVAS FUNÇÕES PARA A ATTACK_AREA
 func _on_attack_area_body_entered(body):
 	if body.is_in_group(grupoPlayer):
 		player_in_attack_range = true
@@ -85,10 +110,12 @@ func _on_attack_area_body_exited(body):
 	if body.is_in_group(grupoPlayer):
 		player_in_attack_range = false
 
-# Função da Hitbox com a variável de grupo consistente
+# -------------------------------
+# HITBOX
+# -------------------------------
+
 func _on_hitbox_body_entered(body):
 	if body.is_in_group(grupoPlayer) and not damage_dealt_this_attack:
-		print("[Goblin LOG] Hitbox acertou o jogador!")
-		var player_node = body
-		player_node.take_damage(10)
+		print("[Goblin LOG] Golpe acertou o jogador!")
+		body.take_damage(10, global_position)
 		damage_dealt_this_attack = true
