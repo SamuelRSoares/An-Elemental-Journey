@@ -1,7 +1,8 @@
-[gd_scene load_steps=60 format=3 uid="uid://mcw45p2qpgx"]
+[gd_scene load_steps=61 format=3 uid="uid://mcw45p2qpgx"]
 
 [ext_resource type="Script" uid="uid://c7wgx4n0xbxlb" path="res://enemies/GoblinMelee.gd" id="1_7w5j5"]
 [ext_resource type="Texture2D" uid="uid://ctxdhlgv5efgl" path="res://sprites/goblin_1/attack1/attack1_0000.png" id="2_ahe2r"]
+[ext_resource type="PackedScene" uid="uid://dv2u72q7vwk8e" path="res://items/fire_orb.tscn" id="2_etwt8"]
 [ext_resource type="Texture2D" uid="uid://d24xfnyeavdyl" path="res://sprites/goblin_1/attack1/attack1_0001.png" id="3_diqtu"]
 [ext_resource type="Texture2D" uid="uid://gxxwsyr1ms20" path="res://sprites/goblin_1/attack1/attack1_0002.png" id="4_07tnj"]
 [ext_resource type="Texture2D" uid="uid://b1j4ec06tejll" path="res://sprites/goblin_1/attack1/attack1_0003.png" id="5_1ymgk"]
@@ -264,6 +265,7 @@ height = 220.0
 
 [node name="EnemyGoblinSword" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_7w5j5")
+drop_item_scene = ExtResource("2_etwt8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_k2l1j")

@@ -34,6 +34,29 @@ animations = [{
 "texture": ExtResource("7_ouwug")
 }],
 "loop": false,
+"name": &"attack_fire",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2fj6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vs4ir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y20ix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_445nj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_054ll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ouwug")
+}],
+"loop": false,
 "name": &"attack_side",
 "speed": 9.0
 }, {
@@ -102,9 +125,7 @@ script = ExtResource("1_qt5ce")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Player"]]
 sprite_frames = SubResource("SpriteFrames_4ptrd")
-animation = &"attack_side"
-frame = 5
-frame_progress = 1.0
+animation = &"attack_fire"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
 shape = SubResource("CapsuleShape2D_2q82o")
