@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://mcw45p2qpgx"]
+[gd_scene load_steps=61 format=3 uid="uid://mcw45p2qpgx"]
 
 [ext_resource type="Script" uid="uid://c7wgx4n0xbxlb" path="res://enemies/GoblinMelee.gd" id="1_7w5j5"]
 [ext_resource type="Texture2D" uid="uid://ctxdhlgv5efgl" path="res://sprites/goblin_1/attack1/attack1_0000.png" id="2_ahe2r"]
@@ -263,12 +263,6 @@ height = 118.0
 radius = 51.0
 height = 220.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etwt8"]
-bg_color = Color(0.36282963, 0.36282942, 0.36282945, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qhjl3"]
-bg_color = Color(0.7568364, 0.16455191, 0.17140314, 1)
-
 [node name="EnemyGoblinSword" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_7w5j5")
 drop_item_scene = ExtResource("2_etwt8")
@@ -302,16 +296,9 @@ scale = Vector2(1, 0.07)
 shape = SubResource("CapsuleShape2D_diqtu")
 disabled = true
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -28.0
-offset_top = 79.0
-offset_right = 28.0
-offset_bottom = 83.0
-theme_override_font_sizes/font_size = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_etwt8")
-theme_override_styles/fill = SubResource("StyleBoxFlat_qhjl3")
-value = 50.0
-show_percentage = false
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
