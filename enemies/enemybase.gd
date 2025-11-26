@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @export var health: int = 60 # Ajustado para o Goblin aguentar 3 hits de 20
 @export var speed: float = 80.0
+@export var drop_item_scene: PackedScene 
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -61,11 +62,13 @@ func change_state(new_state: State):
 	current_state = new_state
 	
 	if new_state == State.DEAD:
+		
 		# Lógica de morte
 		velocity = Vector2.ZERO
 		# Desabilita colisões para não atrapalhar o player enquanto toca a animação
 		$CollisionShape2D.set_deferred("disabled", true) 
 		play_animation("dead") # Certifique-se de ter essa animação
+		_drop_item()
 
 func play_animation(anim_name: String):
 	if animated_sprite.animation != anim_name:
@@ -84,3 +87,15 @@ func _on_animation_finished():
 				change_state(State.CHASING)
 			else:
 				change_state(State.IDLE)
+				
+func _drop_item():
+	if drop_item_scene:
+		# Instancia o item
+		var item_instance = drop_item_scene.instantiate()
+		
+		# Define a posição do item igual à do inimigo
+		item_instance.global_position = global_position
+		
+		# Adiciona o item na cena do jogo (não dentro do inimigo, senão some junto)
+		get_tree().current_scene.call_deferred("add_child", item_instance)
+		print("[Enemy LOG] Item dropado!")
