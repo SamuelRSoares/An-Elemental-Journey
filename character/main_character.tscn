@@ -1,13 +1,42 @@
-[gd_scene load_steps=8 format=3 uid="uid://de83ki2i2xhoy"]
+[gd_scene load_steps=15 format=3 uid="uid://de83ki2i2xhoy"]
 
 [ext_resource type="Script" uid="uid://dq3riw2w5fopt" path="res://character/main_character.gd" id="1_qt5ce"]
 [ext_resource type="Texture2D" uid="uid://dv5whbgadmr5p" path="res://sprites/direito.png" id="1_xdxtq"]
+[ext_resource type="Texture2D" uid="uid://xbo8xbi6lkei" path="res://sprites/player_attack/01-removebg-preview.png" id="2_2fj6y"]
 [ext_resource type="Texture2D" uid="uid://b2lca2561077g" path="res://sprites/correndo.png" id="2_qt5ce"]
 [ext_resource type="Texture2D" uid="uid://cyb0jivtsfdj4" path="res://sprites/frente.png" id="3_k5mev"]
+[ext_resource type="Texture2D" uid="uid://b0gkqvvn30183" path="res://sprites/player_attack/1-removebg-preview.png" id="3_vs4ir"]
+[ext_resource type="Texture2D" uid="uid://b6cjqls36ltkv" path="res://sprites/player_attack/2-removebg-preview.png" id="4_y20ix"]
+[ext_resource type="Texture2D" uid="uid://dti1gqdh26n2m" path="res://sprites/player_attack/3-removebg-preview.png" id="5_445nj"]
 [ext_resource type="Texture2D" uid="uid://xrn4c8lrnwqt" path="res://sprites/costas.png" id="5_vmuo8"]
+[ext_resource type="Texture2D" uid="uid://ofkt0qtbt5p1" path="res://sprites/player_attack/4-removebg-preview.png" id="6_054ll"]
+[ext_resource type="Texture2D" uid="uid://c5hbxexq31us8" path="res://sprites/player_attack/5-removebg-preview.png" id="7_ouwug"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ptrd"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2fj6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vs4ir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y20ix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_445nj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_054ll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ouwug")
+}],
+"loop": false,
+"name": &"attack_side",
+"speed": 9.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_k5mev")
@@ -64,13 +93,25 @@ animations = [{
 radius = 90.0
 height = 456.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fj6y"]
+size = Vector2(434.79166, 110.416626)
+
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(0.15, 0.15)
 script = ExtResource("1_qt5ce")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Player"]]
 sprite_frames = SubResource("SpriteFrames_4ptrd")
-animation = &"idle_up"
+animation = &"attack_side"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
 shape = SubResource("CapsuleShape2D_2q82o")
+
+[node name="PlayerAttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAttackArea"]
+position = Vector2(129.27083, -40)
+shape = SubResource("RectangleShape2D_2fj6y")
+debug_color = Color(0.15823671, 0.6153978, 0.54789627, 0.41960785)

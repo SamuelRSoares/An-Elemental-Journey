@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://mcw45p2qpgx"]
+[gd_scene load_steps=60 format=3 uid="uid://mcw45p2qpgx"]
 
 [ext_resource type="Script" uid="uid://c7wgx4n0xbxlb" path="res://enemies/GoblinMelee.gd" id="1_7w5j5"]
 [ext_resource type="Texture2D" uid="uid://ctxdhlgv5efgl" path="res://sprites/goblin_1/attack1/attack1_0000.png" id="2_ahe2r"]
@@ -21,16 +21,27 @@
 [ext_resource type="Texture2D" uid="uid://di5an32l1drf5" path="res://sprites/goblin_1/run/run_0006.png" id="19_dmcnc"]
 [ext_resource type="Texture2D" uid="uid://brry8yiaqs2ei" path="res://sprites/goblin_1/run/run_0007.png" id="20_7x55w"]
 [ext_resource type="Texture2D" uid="uid://dm10s0xpqares" path="res://sprites/goblin_1/run/run_0008.png" id="21_xjh1e"]
+[ext_resource type="Texture2D" uid="uid://cbsfq4qab7t0a" path="res://sprites/goblin_1/die/die_0000.png" id="22_bq5qq"]
 [ext_resource type="Texture2D" uid="uid://os8d6u3kjg50" path="res://sprites/goblin_1/hurt/hurt_0000.png" id="22_qr5is"]
 [ext_resource type="Texture2D" uid="uid://e2husxfunxel" path="res://sprites/goblin_1/hurt/hurt_0001.png" id="23_86fr4"]
+[ext_resource type="Texture2D" uid="uid://6m0axwok7qko" path="res://sprites/goblin_1/die/die_0001.png" id="23_etwt8"]
+[ext_resource type="Texture2D" uid="uid://dvmo3pusujmcr" path="res://sprites/goblin_1/die/die_0002.png" id="24_qhjl3"]
 [ext_resource type="Texture2D" uid="uid://ww563uqt1i" path="res://sprites/goblin_1/hurt/hurt_0002.png" id="24_rkhsy"]
 [ext_resource type="Texture2D" uid="uid://bh5v2r756dapd" path="res://sprites/goblin_1/hurt/hurt_0003.png" id="25_df2et"]
+[ext_resource type="Texture2D" uid="uid://c3157shiq5irx" path="res://sprites/goblin_1/die/die_0003.png" id="25_mxwhk"]
+[ext_resource type="Texture2D" uid="uid://cw86qc6sat1ij" path="res://sprites/goblin_1/die/die_0004.png" id="26_i6417"]
 [ext_resource type="Texture2D" uid="uid://clw3cwvr0qaxd" path="res://sprites/goblin_1/idle/idle_0000.png" id="26_imlw3"]
+[ext_resource type="Texture2D" uid="uid://ypv665rhgjub" path="res://sprites/goblin_1/die/die_0005.png" id="27_3ee54"]
 [ext_resource type="Texture2D" uid="uid://dppxoi1g4cuif" path="res://sprites/goblin_1/idle/idle_0001.png" id="27_pkrgn"]
 [ext_resource type="Texture2D" uid="uid://6ugvjmxa2i1w" path="res://sprites/goblin_1/idle/idle_0002.png" id="28_6til5"]
+[ext_resource type="Texture2D" uid="uid://bpmwfq7ebskx" path="res://sprites/goblin_1/die/die_0006.png" id="28_dmcnc"]
+[ext_resource type="Texture2D" uid="uid://d3hur00hkpmcl" path="res://sprites/goblin_1/die/die_0007.png" id="29_7x55w"]
 [ext_resource type="Texture2D" uid="uid://gsxhvpqwdvcu" path="res://sprites/goblin_1/idle/idle_0003.png" id="29_w3w44"]
 [ext_resource type="Texture2D" uid="uid://cx6e452voxytf" path="res://sprites/goblin_1/idle/idle_0004.png" id="30_b8lfw"]
+[ext_resource type="Texture2D" uid="uid://dc43isx63csyr" path="res://sprites/goblin_1/die/die_0008.png" id="30_xjh1e"]
 [ext_resource type="Texture2D" uid="uid://c48088qjhse8k" path="res://sprites/goblin_1/idle/idle_0005.png" id="31_ma45j"]
+[ext_resource type="Texture2D" uid="uid://cbdpakrs23es1" path="res://sprites/goblin_1/die/die_0009.png" id="31_qr5is"]
+[ext_resource type="Texture2D" uid="uid://di8vpivyq61b" path="res://sprites/goblin_1/die/die_0010.png" id="32_86fr4"]
 [ext_resource type="Texture2D" uid="uid://ddtiwe2citmnb" path="res://sprites/goblin_1/idle/idle_0006.png" id="32_wldca"]
 [ext_resource type="Texture2D" uid="uid://fsd7u0i0o4qt" path="res://sprites/goblin_1/idle/idle_0007.png" id="33_ocwbq"]
 [ext_resource type="Texture2D" uid="uid://csb6pdpyqofii" path="res://sprites/goblin_1/idle/idle_0008.png" id="34_h2bww"]
@@ -80,7 +91,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("12_d3nxe")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_slash_1",
 "speed": 5.0
 }, {
@@ -112,8 +123,46 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("21_xjh1e")
 }],
-"loop": true,
+"loop": false,
 "name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_bq5qq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_etwt8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_qhjl3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_mxwhk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_i6417")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_3ee54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_dmcnc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_7x55w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_xjh1e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_qr5is")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_86fr4")
+}],
+"loop": false,
+"name": &"dead",
 "speed": 5.0
 }, {
 "frames": [{
@@ -129,7 +178,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("25_df2et")
 }],
-"loop": true,
+"loop": false,
 "name": &"hurt",
 "speed": 5.0
 }, {
@@ -161,7 +210,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("34_h2bww")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle_side",
 "speed": 5.0
 }, {
@@ -193,7 +242,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("43_cfneh")
 }],
-"loop": true,
+"loop": false,
 "name": &"walk_side",
 "speed": 5.0
 }]
@@ -203,7 +252,7 @@ radius = 17.0
 height = 106.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onxgn"]
-radius = 162.00308
+radius = 747.71716
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ahe2r"]
 radius = 41.0
@@ -213,12 +262,13 @@ height = 118.0
 radius = 51.0
 height = 220.0
 
-[node name="EnemyGoblinSword" type="CharacterBody2D"]
+[node name="EnemyGoblinSword" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_7w5j5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_k2l1j")
-animation = &"attack_slash_1"
+animation = &"dead"
+frame_progress = 0.21929048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 18)
